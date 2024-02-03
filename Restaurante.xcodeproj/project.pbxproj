@@ -24,6 +24,7 @@
 		27FCCE9F239046FA00CA894F /* PedidoActualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCCE9E239046FA00CA894F /* PedidoActualViewController.swift */; };
 		27FCCEA12390470400CA894F /* PedidosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCCEA02390470400CA894F /* PedidosViewController.swift */; };
 		27FCCEA823905F3900CA894F /* PlatoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCCEA723905F3900CA894F /* PlatoTableViewCell.swift */; };
+		EF4797EC2B6EE3350070FA55 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4797EB2B6EE3350070FA55 /* Throttler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		27FCCE9E239046FA00CA894F /* PedidoActualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoActualViewController.swift; sourceTree = "<group>"; };
 		27FCCEA02390470400CA894F /* PedidosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosViewController.swift; sourceTree = "<group>"; };
 		27FCCEA723905F3900CA894F /* PlatoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatoTableViewCell.swift; sourceTree = "<group>"; };
+		EF4797EB2B6EE3350070FA55 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				27FCCE9C239046D300CA894F /* PlatosViewController.swift */,
+				EF4797EB2B6EE3350070FA55 /* Throttler.swift */,
 				27FCCEA723905F3900CA894F /* PlatoTableViewCell.swift */,
 				272DB2C623A1A50F00A788AE /* PlatoTableViewCellDelegate.swift */,
 			);
@@ -214,6 +217,7 @@
 			files = (
 				272DB2C723A1A50F00A788AE /* PlatoTableViewCellDelegate.swift in Sources */,
 				27FCCE8A2390256500CA894F /* MainViewController.swift in Sources */,
+				EF4797EC2B6EE3350070FA55 /* Throttler.swift in Sources */,
 				272DB2B7239EC58500A788AE /* LineaPedidoTableViewCellDelegate.swift in Sources */,
 				272DB2C1239F9B7D00A788AE /* DatosPlato.swift in Sources */,
 				27FCCE902390256500CA894F /* Restaurante.xcdatamodeld in Sources */,
