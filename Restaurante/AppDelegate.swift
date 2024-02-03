@@ -14,16 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         let prefs = UserDefaults()
-        prefs.register(defaults:["platosImportados" : false])
+        prefs.register(defaults:["platosImportados" : true])
         
         //Si la preferencia de usuario "platosImportados" está a false,  importamos el JSON y ponemos la preferencia a true
         if !prefs.bool(forKey: "platosImportados") {
             importPlatos()
         }
+//        importPlatos()
         return true
     }
     
@@ -31,13 +31,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Importando platos...")
         let importer = JSONImporter()
         if let datos = importer.importPlatosJSON(nomFich: "platos") {
-            //TODO: copiar los datos de los platos a entidades Core Data
             
+            let miContexto = persistentContainer.viewContext
+            
+            //TODO: copiar los datos de los platos a entidades Core Data
+            for dato in datos {
+                let nuevoPlato = Plato(context: miContexto)
+                nuevoPlato.nombre = dato.nombre
+                nuevoPlato.descripcion = dato.descripcion
+                nuevoPlato.precio = dato.precio
+                nuevoPlato.tipo = dato.tipo
+                
+                do {
+                    try miContexto.save()
+                } catch {
+                    print("Error al guardar el contexto: \(error)")
+                }
+            }
+            }
             
             //Indica que los datos se han importado OK
             let prefs = UserDefaults()
             prefs.set(true, forKey: "platosImportados")
-        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
