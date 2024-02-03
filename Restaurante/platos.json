@@ -1,0 +1,6 @@
+[
+    {"nombre":"pizza all'ananas e cocco", "descripcion":"Deliciosa pizza con rodajas de piña en almíbar y coco sin pelar. Mejor traete un martillo", "precio":9.90, "tipo":"Pizzas"},
+    {"nombre":"Hamburguesa Royal", "descripcion":"1Kg de carne de buey", "precio":19.90, "tipo":"Carnes"},
+    {"nombre":"Pizza pepperoni", "descripcion":"Salsa de tomate, mozzarella, salami picante, salsa pesto y queso parmesano", "precio":12.95, "tipo":"Pizzas"},
+    {"nombre":"Scalopine di Manzo", "descripcion":"Escalopines de ternera con salsa de reducción de vino italiano, limón, tomate y tomillo fresco, con guarnición de linguine verde y blanco", "precio":13.95, "tipo":"Carnes"}
+]
