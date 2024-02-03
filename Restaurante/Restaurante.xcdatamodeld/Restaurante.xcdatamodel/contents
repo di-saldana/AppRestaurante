@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LineaPedido" representedClassName="LineaPedido" syncable="YES" codeGenerationType="class">
+        <attribute name="cantidad" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="pedido" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pedido" inverseName="lineasPedido" inverseEntity="Pedido"/>
+        <relationship name="plato" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plato" inverseName="lineasPedido" inverseEntity="Plato"/>
+    </entity>
+    <entity name="Pedido" representedClassName="Pedido" syncable="YES" codeGenerationType="class">
+        <attribute name="direccion" optional="YES" attributeType="String"/>
+        <attribute name="fecha" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="telefono" optional="YES" attributeType="String"/>
+        <relationship name="lineasPedido" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="LineaPedido" inverseName="pedido" inverseEntity="LineaPedido"/>
+    </entity>
+    <entity name="Plato" representedClassName="Plato" syncable="YES" codeGenerationType="class">
+        <attribute name="descripcion" optional="YES" attributeType="String"/>
+        <attribute name="nombre" optional="YES" attributeType="String"/>
+        <attribute name="precio" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tipo" optional="YES" attributeType="String"/>
+        <relationship name="lineasPedido" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LineaPedido" inverseName="plato" inverseEntity="LineaPedido"/>
+    </entity>
 </model>
