@@ -10,7 +10,6 @@ class PlatosViewController: UIViewController, UITableViewDataSource, NSFetchedRe
     @IBOutlet weak var tabla: UITableView!
     
     var searchController : UISearchController!
-//  let searchController = UISearchController(searchResultsController: nil)
     let throttler = Throttler(minimumDelay: 0.5)
     
     
@@ -86,10 +85,9 @@ class PlatosViewController: UIViewController, UITableViewDataSource, NSFetchedRe
         let vc = storyboard.instantiateViewController(withIdentifier: "Tu Pedido") as! PedidoActualViewController
         
         //TODO: DESCOMENTAR ESTA LINEA!!!!!!!!!
-//        vc.platoElegido = platoElegido
+        vc.platoElegido = platoElegido
         
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     func updateSearchResults(for searchController: UISearchController) {

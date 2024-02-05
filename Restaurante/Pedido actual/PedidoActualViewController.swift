@@ -18,7 +18,7 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
     }
     
     //TODO: descomentar esta línea!!!!
-    //var platoElegido : Plato!
+    var platoElegido : Plato!
     
 
     override func viewDidLoad() {
@@ -27,6 +27,8 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         //TODO:
         // - crear el pedido actual si no existe
         // - crear la linea de pedido y asociarla al plato y al pedido actual
+        
+        print(platoElegido.precio)
     }
    
     
