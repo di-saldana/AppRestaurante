@@ -17,6 +17,7 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
     }
     
     var platoElegido : Plato!
+    var lineasPedido: [LineaPedido] = []
 
 
     override func viewDidLoad() {
@@ -41,34 +42,52 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
                 print("Error al guardar el contexto: \(error)")
             }
         }
+        fetchLineasPedido()
     }
    
-    
     override func viewWillAppear(_ animated: Bool) {
         self.tabla.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: devolver el número real de filas de la tabla
-        let miDelegate = UIApplication.shared.delegate as! AppDelegate
-        let miContexto = miDelegate.persistentContainer.viewContext
-        
-        let fetchRequest: NSFetchRequest<LineaPedido> = LineaPedido.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "plato == %@", platoElegido)
-        
-        do {
-            let resultados = try miContexto.fetch(fetchRequest)
-            return resultados.count
-        } catch {
-            print("Error fetching LineaPedido objects: \(error)")
-            return 0
-        }
+        return lineasPedido.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaLinea", for: indexPath) as! LineaPedidoTableViewCell
         
-        //TODO: rellenar los datos de la celda
+        let lineaPedido = lineasPedido[indexPath.row]
+        celda.nombreLabel.text = lineaPedido.plato?.nombre
+        celda.cantidadLabel.text = "\(lineaPedido.cantidad)"
+        
+        //Necesario para que funcione el delegate
+        celda.pos = indexPath.row
+        celda.delegate = self
+        
+        cantidadCambiada(posLinea: indexPath.row, cantidad: Int(lineaPedido.cantidad))
+
+        return celda
+    }
+    
+    func cantidadCambiada(posLinea: Int, cantidad: Int) {
+        guard posLinea < lineasPedido.count else {
+            return
+        }
+        
+        let miDelegate = UIApplication.shared.delegate as! AppDelegate
+        let miContexto = miDelegate.persistentContainer.viewContext
+        
+        let lineaPedido = lineasPedido[posLinea]
+        lineaPedido.cantidad = Int16(cantidad)
+        
+        do {
+            try miContexto.save()
+        } catch {
+            print("Error al guardar el contexto: \(error)")
+        }
+    }
+
+    private func fetchLineasPedido() {
         let miDelegate = UIApplication.shared.delegate as! AppDelegate
         let miContexto = miDelegate.persistentContainer.viewContext
         
@@ -76,27 +95,10 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         fetchRequest.predicate = NSPredicate(format: "plato == %@", platoElegido)
         
         do {
-            let resultados = try miContexto.fetch(fetchRequest)
-            if let lineaPedido = resultados.first {
-                celda.nombreLabel.text = lineaPedido.plato?.nombre
-                celda.cantidadLabel.text = "\(lineaPedido.cantidad)"
-            } else {
-                print("No LineaPedido object found for platoElegido: \(String(describing: platoElegido))")
-            }
+            lineasPedido = try miContexto.fetch(fetchRequest)
         } catch {
             print("Error fetching LineaPedido objects: \(error)")
         }
-        
-        //Necesario para que funcione el delegate
-        celda.pos = indexPath.row
-        celda.delegate = self
-
-        return celda
     }
-    
-    func cantidadCambiada(posLinea: Int, cantidad: Int) {
-        //TODO: actualizar la cantidad de la línea de pedido correspondiente    
-    }
-    
     
 }
