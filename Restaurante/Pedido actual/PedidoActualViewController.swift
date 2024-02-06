@@ -28,7 +28,24 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         // - crear el pedido actual si no existe
         // - crear la linea de pedido y asociarla al plato y al pedido actual
         
-        print(platoElegido.precio)
+        if StateSingleton.shared.pedidoActual==nil {
+            let miDelegate = UIApplication.shared.delegate! as! AppDelegate
+            let miContexto = miDelegate.persistentContainer.viewContext
+            
+            let pedidoActual = Pedido(context: miContexto)
+            pedidoActual.fecha = Date()
+            
+            let lineaPedido = LineaPedido(context: miContexto)
+            lineaPedido.cantidad = 1
+            lineaPedido.plato = platoElegido
+            lineaPedido.pedido = pedidoActual
+            
+            do {
+                try miContexto.save()
+            } catch {
+                print("Error al guardar el contexto: \(error)")
+            }
+        }
     }
    
     
