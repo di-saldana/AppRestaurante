@@ -12,21 +12,16 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         print("Pedido realizado")
     }
     
-    
     @IBAction func cancelarPedidoPulsado(_ sender: Any) {
         print("Pedido cancelado")
     }
     
-    //TODO: descomentar esta línea!!!!
     var platoElegido : Plato!
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabla.dataSource = self
-        //TODO:
-        // - crear el pedido actual si no existe
-        // - crear la linea de pedido y asociarla al plato y al pedido actual
         
         if StateSingleton.shared.pedidoActual==nil {
             let miDelegate = UIApplication.shared.delegate! as! AppDelegate
@@ -52,21 +47,50 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
     override func viewWillAppear(_ animated: Bool) {
         self.tabla.reloadData()
     }
-    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //TODO: devolver el número real de filas de la tabla
-        return  0
+        let miDelegate = UIApplication.shared.delegate as! AppDelegate
+        let miContexto = miDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<LineaPedido> = LineaPedido.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "plato == %@", platoElegido)
+        
+        do {
+            let resultados = try miContexto.fetch(fetchRequest)
+            return resultados.count
+        } catch {
+            print("Error fetching LineaPedido objects: \(error)")
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaLinea", for: indexPath) as! LineaPedidoTableViewCell
+        
+        //TODO: rellenar los datos de la celda
+        let miDelegate = UIApplication.shared.delegate as! AppDelegate
+        let miContexto = miDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<LineaPedido> = LineaPedido.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "plato == %@", platoElegido)
+        
+        do {
+            let resultados = try miContexto.fetch(fetchRequest)
+            if let lineaPedido = resultados.first {
+                celda.nombreLabel.text = lineaPedido.plato?.nombre
+                celda.cantidadLabel.text = "\(lineaPedido.cantidad)"
+            } else {
+                print("No LineaPedido object found for platoElegido: \(String(describing: platoElegido))")
+            }
+        } catch {
+            print("Error fetching LineaPedido objects: \(error)")
+        }
+        
         //Necesario para que funcione el delegate
         celda.pos = indexPath.row
         celda.delegate = self
-        
-        //TODO: rellenar los datos de la celda
-        
+
         return celda
     }
     
