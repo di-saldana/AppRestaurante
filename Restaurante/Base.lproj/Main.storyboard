@@ -104,7 +104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="urz-8q-fRS">
-                                <rect key="frame" x="33" y="100" width="348" height="653"/>
+                                <rect key="frame" x="33" y="56" width="348" height="697"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sdc-83-dgG">
                                         <rect key="frame" x="8" y="0.0" width="332" height="479.5"/>
@@ -181,17 +181,17 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="g61-1V-TYe">
-                                        <rect key="frame" x="61" y="600" width="226" height="53"/>
+                                        <rect key="frame" x="61" y="600" width="226" height="97"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shx-T3-Ypn">
-                                                <rect key="frame" x="0.0" y="11.5" width="106" height="30"/>
+                                                <rect key="frame" x="0.0" y="33.5" width="106" height="30"/>
                                                 <state key="normal" title="Realizar pedido"/>
                                                 <connections>
                                                     <action selector="realizarPedidoPulsado:" destination="AmO-kd-X7l" eventType="touchUpInside" id="Rjq-gw-qnb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAz-pw-rIz">
-                                                <rect key="frame" x="114" y="11.5" width="112" height="30"/>
+                                                <rect key="frame" x="114" y="33.5" width="112" height="30"/>
                                                 <state key="normal" title="Cancelar pedido">
                                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -292,7 +292,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yE7-ov-X3n"/>
+        <segue reference="9f6-pW-VA9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="pedido" width="37.5" height="37.5"/>

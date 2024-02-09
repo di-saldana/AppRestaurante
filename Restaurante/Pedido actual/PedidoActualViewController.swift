@@ -4,15 +4,25 @@ import UIKit
 import CoreData
 
 class PedidoActualViewController: UIViewController, UITableViewDataSource, LineaPedidoTableViewCellDelegate {
+    
+    var platoElegido : Plato!
+    var lineasPedido : [LineaPedido] = []
 
     @IBOutlet weak var tabla: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
     
-    // TODO: Check que no se cree el pedido si no hay lineasPedido
     @IBAction func realizarPedidoPulsado(_ sender: Any) {
-        // Verifica si ya existe un pedido actual y si hay líneas de pedido
-        guard StateSingleton.shared.pedidoActual == nil && !lineasPedido.isEmpty else {
-            // Si ya hay un pedido o no hay líneas de pedido, no se puede realizar otro pedido
+        // Verifica si hay líneas de pedido
+        guard !lineasPedido.isEmpty else {
+            let alert = UIAlertController(title: "Seleccione los platos a añadir al pedido", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cerrar", comment: "This closes alert"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        // Verifica si ya existe un pedido actual
+        guard StateSingleton.shared.pedidoActual == nil else {
+            // Si ya hay un pedido, muestra un mensaje
             let alert = UIAlertController(title: "Pedido realizado", message: "Su pedido está en camino.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cerrar", comment: "This closes alert"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -25,6 +35,11 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         
         let pedido = Pedido(context: miContexto)
         pedido.fecha = Date()
+        
+        // Asigna las líneas de pedido al pedido actual
+        for lineaPedido in lineasPedido {
+            lineaPedido.pedido = pedido
+        }
         
         StateSingleton.shared.pedidoActual = pedido
         
@@ -58,6 +73,7 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
                 miContexto.delete(lineaPedido)
             }
             
+            // Limpia la variable lineasPedido
             self.lineasPedido.removeAll()
             
             try miContexto.save()
@@ -67,8 +83,8 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
             
             StateSingleton.shared.pedidoActual = nil
             
-            // TODO: Clean table view
-//            self.tabla.reloadData()
+            // Limpia la tabla
+            self.tabla.reloadData()
             
             let alert = UIAlertController(title: "Pedido cancelado", message: "Su pedido ha sido cancelado correctamente.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cerrar", comment: "This closes alert"), style: .default, handler: nil))
@@ -78,25 +94,18 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
             print("Error al eliminar el pedido y sus líneas: \(error)")
         }
     }
-    
-    var platoElegido : Plato!
-    var lineasPedido : [LineaPedido] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabla.dataSource = self
         
-        if StateSingleton.shared.pedidoActual==nil {
+        if StateSingleton.shared.pedidoActual == nil {
             let miDelegate = UIApplication.shared.delegate! as! AppDelegate
             let miContexto = miDelegate.persistentContainer.viewContext
             
             let pedidoActual = Pedido(context: miContexto)
             pedidoActual.fecha = Date()
-            
-            let lineaPedido = LineaPedido(context: miContexto)
-            lineaPedido.cantidad = 1
-            lineaPedido.plato = platoElegido
-            lineaPedido.pedido = pedidoActual
             
             StateSingleton.shared.pedidoActual = pedidoActual
             
@@ -107,21 +116,29 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
             }
         }
         
-        let miDelegate = UIApplication.shared.delegate as! AppDelegate
-        let miContexto = miDelegate.persistentContainer.viewContext
-        
-        let nuevaLineaPedido = LineaPedido(context: miContexto)
-        nuevaLineaPedido.cantidad = 1
-        nuevaLineaPedido.plato = platoElegido
-        nuevaLineaPedido.pedido = StateSingleton.shared.pedidoActual
-        
-        do {
-            try miContexto.save()
-        } catch {
-            print("Error al guardar el contexto: \(error)")
+        if let platoElegido = self.platoElegido {
+            // Verifica si ya hay una línea de pedido para el plato seleccionado
+            let existingLineaPedido = lineasPedido.first { $0.plato == platoElegido }
+            
+            if existingLineaPedido == nil {
+                let miDelegate = UIApplication.shared.delegate as! AppDelegate
+                let miContexto = miDelegate.persistentContainer.viewContext
+                
+                let nuevaLineaPedido = LineaPedido(context: miContexto)
+                nuevaLineaPedido.cantidad = 1
+                nuevaLineaPedido.plato = platoElegido
+                nuevaLineaPedido.pedido = StateSingleton.shared.pedidoActual
+                
+                do {
+                    try miContexto.save()
+                } catch {
+                    print("Error al guardar el contexto: \(error)")
+                }
+                
+                self.tabla.reloadData()
+                fetchLineasPedido()
+            }
         }
-        
-        fetchLineasPedido()
     }
    
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +165,7 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         return celda
     }
     
+    // TODO: Check que no hayan rows repetidas, sino que se cambie la cantidad del item
     func cantidadCambiada(posLinea: Int, cantidad: Int) {
         guard posLinea < lineasPedido.count else {
             return
@@ -166,7 +184,7 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         }
     }
     
-    private func fetchLineasPedido() {
+    func fetchLineasPedido() {
         let miDelegate = UIApplication.shared.delegate as! AppDelegate
         let miContexto = miDelegate.persistentContainer.viewContext
         
