@@ -25,6 +25,8 @@
 		27FCCEA12390470400CA894F /* PedidosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCCEA02390470400CA894F /* PedidosViewController.swift */; };
 		27FCCEA823905F3900CA894F /* PlatoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCCEA723905F3900CA894F /* PlatoTableViewCell.swift */; };
 		EF4797EC2B6EE3350070FA55 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4797EB2B6EE3350070FA55 /* Throttler.swift */; };
+		EF7FD63D2B75B34100A5197E /* PedidosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7FD63C2B75B34100A5197E /* PedidosTableViewCell.swift */; };
+		EF7FD63F2B7643F700A5197E /* PedidosTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7FD63E2B7643F700A5197E /* PedidosTableViewCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		27FCCEA02390470400CA894F /* PedidosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosViewController.swift; sourceTree = "<group>"; };
 		27FCCEA723905F3900CA894F /* PlatoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatoTableViewCell.swift; sourceTree = "<group>"; };
 		EF4797EB2B6EE3350070FA55 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		EF7FD63C2B75B34100A5197E /* PedidosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosTableViewCell.swift; sourceTree = "<group>"; };
+		EF7FD63E2B7643F700A5197E /* PedidosTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosTableViewCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				27FCCEA02390470400CA894F /* PedidosViewController.swift */,
+				EF7FD63C2B75B34100A5197E /* PedidosTableViewCell.swift */,
+				EF7FD63E2B7643F700A5197E /* PedidosTableViewCellDelegate.swift */,
 			);
 			path = "Mis Pedidos";
 			sourceTree = "<group>";
@@ -225,10 +231,12 @@
 				272DB2232396963400A788AE /* LineaPedidoTableViewCell.swift in Sources */,
 				27FCCE9F239046FA00CA894F /* PedidoActualViewController.swift in Sources */,
 				27FCCEA823905F3900CA894F /* PlatoTableViewCell.swift in Sources */,
+				EF7FD63D2B75B34100A5197E /* PedidosTableViewCell.swift in Sources */,
 				272DB2462397D96E00A788AE /* StateSingleton.swift in Sources */,
 				27FCCE882390256500CA894F /* AppDelegate.swift in Sources */,
 				27FCCE9D239046D300CA894F /* PlatosViewController.swift in Sources */,
 				27FCCEA12390470400CA894F /* PedidosViewController.swift in Sources */,
+				EF7FD63F2B7643F700A5197E /* PedidosTableViewCellDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

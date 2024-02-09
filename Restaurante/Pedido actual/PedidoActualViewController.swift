@@ -197,4 +197,38 @@ class PedidoActualViewController: UIViewController, UITableViewDataSource, Linea
         }
     }
     
+    
+    // NSFetchedResultsControllerDelegate methods
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tabla.beginUpdates()
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tabla.endUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                self.tabla.insertRows(at: [indexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                self.tabla.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                self.tabla.reloadRows(at: [indexPath], with: .fade)
+            }
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                self.tabla.deleteRows(at: [indexPath], with: .fade)
+                self.tabla.insertRows(at: [newIndexPath], with: .fade)
+            }
+        @unknown default:
+            fatalError("Unexpected NSFetchedResultsChangeType")
+        }
+    }
+    
 }

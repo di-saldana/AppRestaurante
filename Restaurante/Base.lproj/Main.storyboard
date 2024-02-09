@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -104,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="urz-8q-fRS">
-                                <rect key="frame" x="33" y="56" width="348" height="697"/>
+                                <rect key="frame" x="33" y="100" width="348" height="653"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sdc-83-dgG">
                                         <rect key="frame" x="8" y="0.0" width="332" height="479.5"/>
@@ -181,17 +182,17 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="g61-1V-TYe">
-                                        <rect key="frame" x="61" y="600" width="226" height="97"/>
+                                        <rect key="frame" x="61" y="600" width="226" height="53"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shx-T3-Ypn">
-                                                <rect key="frame" x="0.0" y="33.5" width="106" height="30"/>
+                                                <rect key="frame" x="0.0" y="11.5" width="106" height="30"/>
                                                 <state key="normal" title="Realizar pedido"/>
                                                 <connections>
                                                     <action selector="realizarPedidoPulsado:" destination="AmO-kd-X7l" eventType="touchUpInside" id="Rjq-gw-qnb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAz-pw-rIz">
-                                                <rect key="frame" x="114" y="33.5" width="112" height="30"/>
+                                                <rect key="frame" x="114" y="11.5" width="112" height="30"/>
                                                 <state key="normal" title="Cancelar pedido">
                                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -255,21 +256,95 @@
             </objects>
             <point key="canvasLocation" x="406" y="-193"/>
         </scene>
-        <!--Tu historial-->
+        <!--Historial-->
         <scene sceneID="wCB-Fb-v3o">
             <objects>
-                <viewController id="MHd-BG-BtS" customClass="PedidosViewController" customModule="Restaurante" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Historial" id="MHd-BG-BtS" customClass="PedidosViewController" customModule="Restaurante" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y6f-je-gLH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mqi-RN-F35">
+                                <rect key="frame" x="0.0" y="90" width="414" height="701"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celdaHistorial" rowHeight="92" id="xlL-gC-8pl" customClass="PedidosTableViewCell" customModule="Restaurante" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xlL-gC-8pl" id="1hV-OD-c5G">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" sizingRule="oversize" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duz-9m-6MQ">
+                                                    <rect key="frame" x="20" y="11" width="240" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="6Bl-D0-deg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mf-eU-4RL">
+                                                    <rect key="frame" x="20" y="49" width="258" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="258" id="hbY-qT-fZq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Platos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zst-rs-kzb">
+                                                    <rect key="frame" x="332" y="11" width="62" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="duz-9m-6MQ" firstAttribute="leading" secondItem="5mf-eU-4RL" secondAttribute="leading" id="1yf-eY-3Bk"/>
+                                                <constraint firstItem="Zst-rs-kzb" firstAttribute="leading" secondItem="duz-9m-6MQ" secondAttribute="trailing" constant="72" id="9Zh-qO-zfi"/>
+                                                <constraint firstItem="duz-9m-6MQ" firstAttribute="top" secondItem="1hV-OD-c5G" secondAttribute="topMargin" id="MFP-Nd-2nB"/>
+                                                <constraint firstItem="5mf-eU-4RL" firstAttribute="top" secondItem="duz-9m-6MQ" secondAttribute="bottom" constant="17" id="Uw8-Lu-7ip"/>
+                                                <constraint firstItem="duz-9m-6MQ" firstAttribute="leading" secondItem="1hV-OD-c5G" secondAttribute="leadingMargin" id="nem-3n-r7e"/>
+                                                <constraint firstItem="duz-9m-6MQ" firstAttribute="baseline" secondItem="Zst-rs-kzb" secondAttribute="baseline" id="ud8-q6-Jet"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fechaLabel" destination="duz-9m-6MQ" id="z35-F4-4ln"/>
+                                            <outlet property="numPlatosLabel" destination="Zst-rs-kzb" id="9Hn-x1-mwL"/>
+                                            <outlet property="totalLabel" destination="5mf-eU-4RL" id="pFs-i8-RgY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfC-xh-bDM">
+                                <rect key="frame" x="0.0" y="46" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Historial" id="G5N-Po-t3R"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cyR-W2-tg2"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cyR-W2-tg2" firstAttribute="bottom" secondItem="mqi-RN-F35" secondAttribute="bottom" constant="22" id="0uG-xN-Hkl"/>
+                            <constraint firstItem="IfC-xh-bDM" firstAttribute="leading" secondItem="mqi-RN-F35" secondAttribute="leading" id="BrE-PW-O0N"/>
+                            <constraint firstItem="mqi-RN-F35" firstAttribute="top" secondItem="IfC-xh-bDM" secondAttribute="bottom" id="J01-MM-Wtz"/>
+                            <constraint firstItem="IfC-xh-bDM" firstAttribute="centerX" secondItem="y6f-je-gLH" secondAttribute="centerX" id="Of6-IY-Oi7"/>
+                            <constraint firstItem="mqi-RN-F35" firstAttribute="leading" secondItem="cyR-W2-tg2" secondAttribute="leading" id="OfZ-De-5Ep"/>
+                            <constraint firstItem="IfC-xh-bDM" firstAttribute="top" secondItem="y6f-je-gLH" secondAttribute="topMargin" constant="-2" id="qzh-y0-kWh"/>
+                            <constraint firstItem="IfC-xh-bDM" firstAttribute="trailing" secondItem="mqi-RN-F35" secondAttribute="trailing" id="tJI-m2-8D1"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tu historial" image="usuario" id="HMB-UN-q1T"/>
+                    <connections>
+                        <outlet property="tabla" destination="mqi-RN-F35" id="FCi-iM-hLy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ZC-qj-qGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-267" y="860"/>
+            <point key="canvasLocation" x="-268.1159420289855" y="859.82142857142856"/>
         </scene>
         <!--Platos-->
         <scene sceneID="ZTb-Z4-p6v">
@@ -292,11 +367,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9f6-pW-VA9"/>
+        <segue reference="yE7-ov-X3n"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="pedido" width="37.5" height="37.5"/>
         <image name="plato" width="50" height="50"/>
         <image name="usuario" width="33.333332061767578" height="33.333332061767578"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
